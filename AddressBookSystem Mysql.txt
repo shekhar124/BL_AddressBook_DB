@@ -1,0 +1,318 @@
+ADDRESS BOOK SYSTEM 
+
+UC1 -> create Adress book service DB
+________________________________________________
+
+
+
+
+mysql> create database address_book_service;
+Query OK, 1 row affected (0.01 sec)
+mysql> show databases;
++----------------------+
+| Database             |
++----------------------+
+| address_book_service |
+| information_schema   |
+| mysql                |
+| payroll_service      |
+| performance_schema   |
+| sakila               |
+| sys                  |
+| world                |
++----------------------+
+8 rows in set (0.00 sec)
+
+mysql> use address_book_service;
+Database changed
+
+
+___________________________________________
+UC2-> create table adress_book and add fName,secondname,city,zip,email, all its properties
+_______________________________________________________________________________________________________
+mysql> create table address_book
+    -> (first_name varchar(50) not null, last_name varchar(50) not null, address varchar(100)not null, city varchar(25) not null, state varchar(25) not null, zip int not null, phone_number varchar(12) not null, email varchar(30) not null, primary key(first_name)) ENGINE=InnoDB default charset = latin1;
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> desc address_book;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| first_name   | varchar(50)  | NO   | PRI | NULL    |       |
+| last_name    | varchar(50)  | NO   |     | NULL    |       |
+| address      | varchar(100) | NO   |     | NULL    |       |
+| city         | varchar(25)  | NO   |     | NULL    |       |
+| state        | varchar(25)  | NO   |     | NULL    |       |
+| zip          | int          | NO   |     | NULL    |       |
+| phone_number | varchar(12)  | NO   |     | NULL    |       |
+| email        | varchar(30)  | NO   |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+8 rows in set (0.01 sec)
+__________________________________________________________________________
+UC3-> Ablity to add contact to adress boook
+__________________________________________________________________________
+mysql> insert into
+    ->  address_book
+    -> (first_name,last_name,address,city,state,zip,phone_number,email)
+    -> values ('Ramana','Reddy','chotuppal','Hyderabad','T.G',5055001,'9573356779','ramana@gmail.com');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into
+    -> address_book
+    -> (first_name,last_name,address,city,state,zip,phone_number,email)
+    -> values ('Anil','Reddy','nearSiddpata','kariminagar','T.G',558790,'9573007494','anil@gmail.com');
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into
+    -> address_book
+    -> (first_name,last_name,address,city,state,zip,phone_number,email)
+    -> values
+    -> ('sairam','varma','ruralWl','warangl','MH','500789','8008976889','sairam@gmail.com');
+Query OK, 1 row affected (0.01 sec)
+mysql> insert into
+    -> address_book
+    -> (first_name,last_name,address,city,state,zip,phone_number,email)
+    -> values
+    -> ('Pranay','Reddy','nearleh','tamilndu','kerala','567876','81068482','pranay@gmail.com');
+Query OK, 1 row affected (0.01 sec)
+mysql> select * from address_book;
++------------+-----------+--------------+-------------+--------+---------+--------------+------------------+
+| first_name | last_name | address      | city        | state  | zip     | phone_number | email            |
++------------+-----------+--------------+-------------+--------+---------+--------------+------------------+
+| Anil       | Reddy     | nearSiddpata | kariminagar | T.G    |  558790 | 9573007494   | anil@gmail.com   |
+| Pranay     | Reddy     | nearleh      | tamilndu    | kerala |  567876 | 81068482     | pranay@gmail.com |
+| Ramana     | Reddy     | chotuppal    | Hyderabad   | T.G    | 5055001 | 9573356779   | ramana@gmail.com |
+| sairam     | varma     | ruralWl      | warangl     | MH     |  500789 | 8008976889   | sairam@gmail.com |
++------------+-----------+--------------+-------------+--------+---------+--------------+------------------+
+4 rows in set (0.00 sec)
+_______________________________________________________________________________________________
+
+UC4-> Ablity to edit contact by name
+_________________________________________________________________________________________________________
+
+mysql> update address_book set address='RURALWRNGL' where first_name = 'sairam';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from address_book;
++------------+-----------+--------------+-------------+--------+---------+--------------+------------------+
+| first_name | last_name | address      | city        | state  | zip     | phone_number | email            |
++------------+-----------+--------------+-------------+--------+---------+--------------+------------------+
+| Anil       | Reddy     | nearSiddpata | kariminagar | T.G    |  558790 | 9573007494   | anil@gmail.com   |
+| Pranay     | Reddy     | nearleh      | tamilndu    | kerala |  567876 | 81068482     | pranay@gmail.com |
+| Ramana     | Reddy     | chotuppal    | Hyderabad   | T.G    | 5055001 | 9573356779   | ramana@gmail.com |
+| sairam     | varma     | RURALWRNGL   | warangl     | MH     |  500789 | 8008976889   | sairam@gmail.com |
++------------+-----------+--------------+-------------+--------+---------+--------------+------------------+
+4 rows in set (0.01 sec)
+
+
+_____________________________________________________________
+UC5-> Ablity to delete person using name
+___________________________________________________
+
+mysql> delete from address_book where first_name='sairam';
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from address_book;
++------------+-----------+--------------+-------------+--------+---------+--------------+------------------+
+| first_name | last_name | address      | city        | state  | zip     | phone_number | email            |
++------------+-----------+--------------+-------------+--------+---------+--------------+------------------+
+| Anil       | Reddy     | nearSiddpata | kariminagar | T.G    |  558790 | 9573007494   | anil@gmail.com   |
+| Pranay     | Reddy     | nearleh      | tamilndu    | kerala |  567876 | 81068482     | pranay@gmail.com |
+| Ramana     | Reddy     | chotuppal    | Hyderabad   | T.G    | 5055001 | 9573356779   | ramana@gmail.com |
++------------+-----------+--------------+-------------+--------+---------+--------------+------------------+
+3 rows in set (0.01 sec)
+
+mysql>
+
+________________________________________________________________________
+UC6->6 Ablity to retrieve person city or state frm adress book
+
+________________________________________________________________
+
+mysql> SELECT CITY,State FROM address_book;
++-------------+--------+
+| CITY        | State  |
++-------------+--------+
+| kariminagar | T.G    |
+| tamilndu    | kerala |
+| Hyderabad   | M.H    |
++-------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT first_name,CITY,State FROM address_book;
++------------+-------------+--------+
+| first_name | CITY        | State  |
++------------+-------------+--------+
+| Anil       | kariminagar | T.G    |
+| Pranay     | tamilndu    | kerala |
+| Ramana     | Hyderabad   | M.H    |
++------------+-------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from address_book where CITY='kariminagar' and State='T.G';
++------------+-----------+--------------+-------------+-------+--------+--------------+----------------+
+| first_name | last_name | address      | city        | state | zip    | phone_number | email          |
++------------+-----------+--------------+-------------+-------+--------+--------------+----------------+
+| Anil       | Reddy     | nearSiddpata | kariminagar | T.G   | 558790 | 9573007494   | anil@gmail.com |
++------------+-----------+--------------+-------------+-------+--------+--------------+----------------+
+1 row in set (0.00 sec)
+________________________________________________________________________________
+UC7->
+_____________________________________________________
+
+mysql> SELECT City,State, COUNT(*) FROM address_book ;
++-------------+-------+----------+
+| City        | State | COUNT(*) |
++-------------+-------+----------+
+| kariminagar | T.G   |        3 |
++-------------+-------+----------+
+1 row in set (0.00 sec)
+
+mysql> select count(first_name) from address_book where city='Bangalore' or state='Maharashtra';
++-------------------+
+| count(first_name) |
++-------------------+
+|                 0 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select count(first_name) from address_book where city='kariminagar' or state='T.G';
++-------------------+
+| count(first_name) |
++-------------------+
+|                 1 |
++-------------------+
+1 row in set (0.00 sec)
+_________________________________________________________________________
+UC8->
+________________________________________________________________________________
+mysql> SELECT * FROM address_book ORDER BY first_name ASC;
++------------+-----------+--------------+-------------+--------+---------+--------------+------------------+
+| first_name | last_name | address      | city        | state  | zip     | phone_number | email            |
++------------+-----------+--------------+-------------+--------+---------+--------------+------------------+
+| Anil       | Reddy     | nearSiddpata | kariminagar | T.G    |  558790 | 9573007494   | anil@gmail.com   |
+| Pranay     | Reddy     | nearleh      | tamilndu    | kerala |  567876 | 81068482     | pranay@gmail.com |
+| Ramana     | Reddy     | chotuppal    | Hyderabad   | M.H    | 5055001 | 9573356779   | ramana@gmail.com |
++------------+-----------+--------------+-------------+--------+---------+--------------+------------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM address_book ORDER BY first_name DESC;
++------------+-----------+--------------+-------------+--------+---------+--------------+------------------+
+| first_name | last_name | address      | city        | state  | zip     | phone_number | email            |
++------------+-----------+--------------+-------------+--------+---------+--------------+------------------+
+| Ramana     | Reddy     | chotuppal    | Hyderabad   | M.H    | 5055001 | 9573356779   | ramana@gmail.com |
+| Pranay     | Reddy     | nearleh      | tamilndu    | kerala |  567876 | 81068482     | pranay@gmail.com |
+| Anil       | Reddy     | nearSiddpata | kariminagar | T.G    |  558790 | 9573007494   | anil@gmail.com   |
++------------+-----------+--------------+-------------+--------+---------+--------------+------------------+
+3 rows in set (0.00 sec)
+
+mysql>
+_____________________________________________________________________________
+UC9
+_____________________________________________________________
+
+mysql> Alter table address_book add name varchar(20) not null, add Type Varchar(12) not null;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+mysql> select * from address_book;
++------------+-----------+--------------+-------------+--------+---------+--------------+------------------+------+------+
+| first_name | last_name | address      | city        | state  | zip     | phone_number | email            | name | Type |
++------------+-----------+--------------+-------------+--------+---------+--------------+------------------+------+------+
+| Anil       | Reddy     | nearSiddpata | kariminagar | T.G    |  558790 | 9573007494   | anil@gmail.com   |      |      |
+| Pranay     | Reddy     | nearleh      | tamilndu    | kerala |  567876 | 81068482     | pranay@gmail.com |      |      |
+| Ramana     | Reddy     | chotuppal    | Hyderabad   | M.H    | 5055001 | 9573356779   | ramana@gmail.com |      |      |
++------------+-----------+--------------+-------------+--------+---------+--------------+------------------+------+------+
+3 rows in set (0.01 sec)
+mysql> update address_book set name='book-A',Type='Friends' where first_name='Anil';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update address_book set name='book-B',Type='Family' where first_name='Pranay';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update address_book set name='book-B',Type='Family' where first_name='Ramana';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from address_book;
++------------+-----------+--------------+-------------+--------+---------+--------------+------------------+--------+---------+
+| first_name | last_name | address      | city        | state  | zip     | phone_number | email            | name   | Type    |
++------------+-----------+--------------+-------------+--------+---------+--------------+------------------+--------+---------+
+| Anil       | Reddy     | nearSiddpata | kariminagar | T.G    |  558790 | 9573007494   | anil@gmail.com   | book-A | Friends |
+| Pranay     | Reddy     | nearleh      | tamilndu    | kerala |  567876 | 81068482     | pranay@gmail.com | book-B | Family  |
+| Ramana     | Reddy     | chotuppal    | Hyderabad   | M.H    | 5055001 | 9573356779   | ramana@gmail.com | book-B | Family  |
++------------+-----------+--------------+-------------+--------+---------+--------------+------------------+--------+---------+
+3 rows in set (0.00 sec)
+mysql> select * from address_book;
++------------+-----------+--------------+-------------+--------+---------+--------------+------------------+--------+---------+
+| first_name | last_name | address      | city        | state  | zip     | phone_number | email            | name   | Type    |
++------------+-----------+--------------+-------------+--------+---------+--------------+------------------+--------+---------+
+| Anil       | Reddy     | nearSiddpata | kariminagar | T.G    |  558790 | 9573007494   | anil@gmail.com   | book-A | Friends |
+| Pranay     | Reddy     | nearleh      | tamilndu    | kerala |  567876 | 81068482     | pranay@gmail.com | book-B | Family  |
+| Ramana     | Reddy     | chotuppal    | Hyderabad   | M.H    | 5055001 | 9573356779   | ramana@gmail.com | book-B | Family  |
++------------+-----------+--------------+-------------+--------+---------+--------------+------------------+--------+---------+
+3 rows in set (0.00 sec)
+
+_____________________________________________
+UC10
+________________________________________________
+
+mysql> select count(type) from address_book;
++-------------+
+| count(type) |
++-------------+
+|           3 |
++-------------+
+1 row in set (0.01 sec)
+
+mysql> select count(type) from address_book where type='family';
++-------------+
+| count(type) |
++-------------+
+|           2 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select count(type) from address_book where type='Friends';
++-------------+
+| count(type) |
++-------------+
+|           1 |
++-------------+
+1 row in set (0.00 sec)
+______________________________________________________
+uc11
+________________________________
+mysql> insert into
+    -> address_book
+    -> (first_name,last_name,address,city,state,zip,phone_number,email,name,Type)
+    -> values
+    -> ('SaiRam','rao','wrngl','mumbi','knr',505981,'9573356779','sairam@gmail.com','Book-D','F&F');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from address_book;
++------------+-----------+--------------+-------------+--------+---------+--------------+------------------+--------+---------+
+| first_name | last_name | address      | city        | state  | zip     | phone_number | email            | name   | Type    |
++------------+-----------+--------------+-------------+--------+---------+--------------+------------------+--------+---------+
+| Anil       | Reddy     | nearSiddpata | kariminagar | T.G    |  558790 | 9573007494   | anil@gmail.com   | book-A | Friends |
+| Pranay     | Reddy     | nearleh      | tamilndu    | kerala |  567876 | 81068482     | pranay@gmail.com | book-B | Family  |
+| Ramana     | Reddy     | chotuppal    | Hyderabad   | M.H    | 5055001 | 9573356779   | ramana@gmail.com | book-B | Family  |
+| SaiRam     | rao       | wrngl        | mumbi       | knr    |  505981 | 9573356779   | sairam@gmail.com | Book-D | F&F     |
++------------+-----------+--------------+-------------+--------+---------+--------------+------------------+--------+---------+
+4 rows in set (0.01 sec)
+
+mysql>
+
+
+
+
+
+
+
+
+
+
+
+
+
